@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -56,6 +57,10 @@ public class ImageBaseActivity extends AppCompatActivity {
     }
 
     public void showToast(String toastText) {
-        Toast.makeText(getApplicationContext(), toastText, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show();
+    }
+
+    public void showToast(@StringRes int toastText) {
+        Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show();
     }
 }
