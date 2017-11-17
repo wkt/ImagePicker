@@ -12,11 +12,22 @@
         android:id="@+id/cv_crop_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>-->
-
-    <com.lzy.imagepicker.view.CropImageView
-        android:id="@+id/cv_crop_image"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <com.lzy.imagepicker.view.CropImageView
+            android:id="@+id/cv_crop_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:layout_margin="32dp"
+            android:layout_gravity="center|top"
+            android:gravity="center"
+            android:text="@string/photo_crop_text"
+            android:textColor="@color/photo_crop_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
 
     <!-- <com.lzy.imagepicker.view.crop.CropImageView2
          android:id="@+id/cv_crop_image"
