@@ -1,0 +1,105 @@
+apply from: "${project.projectDir}/upload_local.gradle"
+
+/*
+UPLOAD is defined in upload_local.gradle like:
+ext.UPLOAD = [
+    nexusUrl :'http://nexus.domain.com/path/',
+    nexusUsername:'username',
+    nexusPassword:'password',]
+ */
+
+
+def nexusUrl = UPLOAD.nexusUrl
+def nexusUsername = UPLOAD.nexusUsername
+def nexusPassword = UPLOAD.nexusPassword
+
+
+def VERSION = "0.5.5-SNAPSHOT"
+def GROUP = 'com.imagepicker'
+def ARTIFACT_ID = "${versions.support_lib}"
+def NAME = 'Image Picker'
+def DESCRIPTION = 'Image Picker'
+def siteURL = "http://weiketing.com/"
+def gitURL = "http://weiketing.com/"
+
+apply plugin: 'maven'
+
+group = GROUP
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(
+                    url: "${nexusUrl}/content/repositories/releases") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+            snapshotRepository(
+                    url: "${nexusUrl}/content/repositories/snapshots") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+            pom.project {
+                packaging 'aar'
+                name NAME
+                url siteURL
+                description DESCRIPTION
+
+                version VERSION
+                artifactId ARTIFACT_ID
+                groupId GROUP
+
+
+                developers {
+                    developer {
+                        id 'wkt'                // 开发者信息
+                        name 'WeiKeting'              // 开发者信息
+                        email 'weikting@gmail.com'    // 开发者信息
+                    }
+                }
+
+//                licenses {
+//                    license {
+//                        name 'The Apache Software License, Version 2.0'
+//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                    }
+//                }
+
+                scm {
+                    connection gitURL
+                    developerConnection gitURL
+                    url siteURL
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+javadoc {
+    options {
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "http://docs.oracle.com/javase/7/docs/api"
+        title NAME   // 文档标题
+    }
+}
+
+//artifacts {
+////    archives javadocJar
+//    archives sourcesJar
+//}

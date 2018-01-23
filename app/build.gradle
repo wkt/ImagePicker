@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion versions.compile_sdk
+    buildToolsVersion versions.build_tools
 
     defaultConfig {
         applicationId "com.lzy.imagepickerdemo"
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion versions.min_sdk
+        targetSdkVersion versions.target_sdk
         versionCode 1
         versionName "1.0"
     }
@@ -21,8 +21,8 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    compile 'com.android.support:recyclerview-v7:25.1.1'
+    compile "com.android.support:appcompat-v7:${versions.support_lib}"
+    compile "com.android.support:recyclerview-v7:${versions.support_lib}"
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
