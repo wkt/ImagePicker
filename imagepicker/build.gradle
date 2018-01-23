@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion versions.compile_sdk
+    buildToolsVersion versions.build_tools
 
     defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 22
+        minSdkVersion versions.min_sdk
+        targetSdkVersion versions.target_sdk
         versionCode 1
         versionName "1.0"
     }
@@ -20,9 +20,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile "com.android.support:appcompat-v7:${versions.support_lib}"
+    compile "com.android.support:recyclerview-v7:${versions.support_lib}"
 }
 
-//apply from: '../bintray.gradle'
+apply from: 'upload.gradle'
